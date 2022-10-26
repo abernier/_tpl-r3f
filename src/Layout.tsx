@@ -78,7 +78,7 @@ function Layout({ children, bg }: LayoutProps) {
         <meshStandardMaterial color={gui.bg} />
       </mesh>
 
-      {gui.grid && <gridHelper args={[30, 30, 30]} position-y="-1" />}
+      {gui.grid && <gridHelper args={[30, 30, 30]} position-y="0" />}
       {gui.axes && <axesHelper args={[5]} />}
 
       {children}
