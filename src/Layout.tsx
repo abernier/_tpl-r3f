@@ -12,7 +12,7 @@ import { useControls, folder } from "leva";
 import type { Camera } from "three";
 
 type LayoutProps = {
-  children: ReactNode;
+  children?: ReactNode;
   bg: THREE.Color;
 };
 
@@ -68,7 +68,7 @@ function Layout({ children, bg }: LayoutProps) {
       <ambientLight intensity={0.2} />
 
       {/* Ground */}
-      <mesh
+      {/* <mesh
         scale={1000}
         rotation={[-Math.PI / 2, 0, 0]}
         position-y="-1"
@@ -76,7 +76,7 @@ function Layout({ children, bg }: LayoutProps) {
       >
         <circleGeometry args={[1, 32]} />
         <meshStandardMaterial color={gui.bg} />
-      </mesh>
+      </mesh> */}
 
       {gui.grid && <gridHelper args={[30, 30, 30]} position-y="0" />}
       {gui.axes && <axesHelper args={[5]} />}
