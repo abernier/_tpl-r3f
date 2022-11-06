@@ -18,7 +18,7 @@ jobs:
           node-version: 16
           cache: "npm"
       - run: npm ci
-      - run: PUBLIC_URL="https://$USERNAME.github.io/$REPONAME" npm run build
+      - run: PUBLIC_URL="https://$USERNAME.github.io/$REPONAME" CI=0 npm run build
         env:
           USERNAME: ${{ github.repository_owner }}
           REPONAME: ${{ github.event.repository.name }}
