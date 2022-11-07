@@ -12,21 +12,24 @@ function App() {
     <App.Styled>
       <KeyboardControls
         map={[
-          { name: "forward", keys: ["ArrowUp", "KeyW"] },
-          { name: "backward", keys: ["ArrowDown", "KeyS"] },
-          { name: "leftward", keys: ["ArrowLeft", "KeyA"] },
-          { name: "rightward", keys: ["ArrowRight", "KeyD"] },
+          { name: "forward", keys: ["KeyW"] },
+          { name: "backward", keys: ["KeyS"] },
+          { name: "leftward", keys: ["KeyA"] },
+          { name: "rightward", keys: ["KeyD"] },
           { name: "jump", keys: ["Space"] },
         ]}
       >
         <Canvas shadows>
-          <Physics>
+          <Physics
+          // gravity={[0, -4, 0]}
+          // timeStep={1 / 60}
+          >
             <Debug />
 
             <Layout />
 
             <RigidBody>
-              <mesh castShadow>
+              <mesh position-y={1} castShadow>
                 <boxGeometry args={[2, 2, 2]} />
                 <meshStandardMaterial color="blue" />
               </mesh>
@@ -36,13 +39,9 @@ function App() {
 
             {/* Ground */}
             <RigidBody type="fixed">
-              <mesh
-                rotation={[-Math.PI / 2, 0, 0]}
-                position-y="-1"
-                receiveShadow
-              >
-                <boxGeometry args={[100, 100, 0.01]} />
-                <meshStandardMaterial color="gray" />
+              <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+                <boxGeometry args={[100, 100, 0.1]} />
+                <meshStandardMaterial color="gray" transparent opacity={0.8} />
               </mesh>
             </RigidBody>
           </Physics>
