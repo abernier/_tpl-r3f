@@ -7,7 +7,7 @@ import { useKeyboardControls } from "@react-three/drei";
 
 function Ball({}) {
   const bodyRef = useRef<RigidBodyApi>(null);
-  const [getKeys] = useKeyboardControls();
+  const [subscribeKeys, getKeys] = useKeyboardControls();
 
   useFrame((state, delta) => {
     const { forward, backward, leftward, rightward } = getKeys();
