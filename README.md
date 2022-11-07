@@ -1,4 +1,4 @@
-[Fork me on CodeSandbox](https://codesandbox.io/s/github/abernier/tpl-r3f)
+[Edit on CodeSandbox](https://codesandbox.io/s/github/abernier/tpl-r3f)
 
 # INSTALL
 
