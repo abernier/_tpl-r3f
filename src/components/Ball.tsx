@@ -16,7 +16,7 @@ function Ball() {
   const bodyRef = useRef<RigidBodyApi>(null);
   const meshRef = useRef<Mesh>(null);
 
-  const [subscribeKeys, getKeys] = useKeyboardControls();
+  const [subscribeKeys, getKeys] = useKeyboardControls(); // see: https://github.com/pmndrs/drei#keyboardcontrols
   const { rapier, world } = useRapier();
 
   const gui = useControls({
@@ -117,7 +117,7 @@ function Ball() {
   useEffect(() => {
     const unsubscribeJump = subscribeKeys(
       (state: any) => state.jump,
-      (value: boolean) => {
+      (value) => {
         if (value) jump();
       }
     );

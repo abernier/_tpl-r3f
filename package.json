@@ -11,13 +11,12 @@
     "leva": "^0.9.32",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "three": "^0.145.0"
+    "three": "^0.146.0"
   },
   "devDependencies": {
-    "@types/node": "^16.18.0",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
-    "@types/three": "^0.144.0",
+    "@types/three": "^0.146.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.8.4"
   },
