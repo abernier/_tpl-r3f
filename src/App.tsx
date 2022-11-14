@@ -21,8 +21,9 @@ function App() {
       >
         <Canvas shadows>
           <Physics
-          // gravity={[0, -4, 0]}
-          // timeStep={1 / 60}
+            gravity={[0, -60, 0]}
+            // timeStep={1 / 60}
+            //
           >
             <Debug />
 
@@ -39,7 +40,11 @@ function App() {
 
             {/* Ground */}
             <RigidBody type="fixed">
-              <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+              <mesh
+                position-y={-0.1 / 2}
+                rotation={[-Math.PI / 2, 0, 0]}
+                receiveShadow
+              >
                 <boxGeometry args={[100, 100, 0.1]} />
                 <meshStandardMaterial color="gray" transparent opacity={0.8} />
               </mesh>
