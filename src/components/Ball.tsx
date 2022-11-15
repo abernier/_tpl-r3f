@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useRapier, RigidBody } from "@react-three/rapier";
@@ -6,15 +6,12 @@ import { useRapier, RigidBody } from "@react-three/rapier";
 import { useKeyboardControls } from "@react-three/drei";
 
 import type { RigidBodyApi } from "@react-three/rapier";
-import { Mesh, Vector3 } from "three";
 import { folder, useControls } from "leva";
 
 function Ball() {
   const { camera } = useThree();
 
-  const [pos] = useState<Vector3>(new THREE.Vector3());
   const bodyRef = useRef<RigidBodyApi>(null);
-  const meshRef = useRef<Mesh>(null);
 
   const [subscribeKeys, getKeys] = useKeyboardControls(); // see: https://github.com/pmndrs/drei#keyboardcontrols
   const { rapier, world } = useRapier();
@@ -38,7 +35,7 @@ function Ball() {
   });
 
   //
-  // 🎮 arrows
+  // 🎮 wasd
   //
 
   useFrame((state, delta) => {
@@ -67,24 +64,24 @@ function Ball() {
       torque.z = 1;
     }
 
-    if (impulse.length() > 0) {
+    const { current: body } = bodyRef;
+
+    if (body && impulse.length() > 0) {
       impulse.applyMatrix4(camera.matrixWorld).sub(camera.position);
-      impulse.normalize().setLength(impulseStrength);
       impulse.setY(0);
+      impulse.normalize().setLength(impulseStrength);
       // console.log("impulse", impulse);
 
-      const { current: body } = bodyRef;
-      body?.applyImpulse(impulse);
+      body.applyImpulse(impulse);
     }
 
-    if (torque.length() > 0) {
+    if (body && torque.length() > 0) {
       torque.applyMatrix4(camera.matrixWorld).sub(camera.position);
-      torque.normalize().setLength(torqueStrength);
       torque.setY(0);
+      torque.normalize().setLength(torqueStrength);
       // console.log("torque", torque);
 
-      const { current: body } = bodyRef;
-      body?.applyTorqueImpulse(torque);
+      body.applyTorqueImpulse(torque);
     }
   });
 
@@ -95,24 +92,21 @@ function Ball() {
   const jump = useCallback(() => {
     // console.log("jump");
 
-    const { current: mesh } = meshRef;
     const { current: body } = bodyRef;
-    if (mesh) {
-      mesh.getWorldPosition(pos); // https://discourse.threejs.org/t/how-to-make-camera-follow-a-react-three-rapier-object/44405/5
-      const origin = pos.clone();
-      // console.log("origin", origin);
+
+    if (body) {
+      const origin = body.translation();
 
       origin.y -= gui.radius + 0.05;
       const direction = { x: 0, y: -1, z: 0 };
       const ray = new rapier.Ray(origin, direction);
       const hit = world.raw().castRay(ray, 10, true);
-      // console.log("hit", hit);
 
-      if (body && hit && hit.toi < 0.15) {
+      if (hit && hit.toi < 0.15) {
         body.applyImpulse({ x: 0, y: gui.jumpStrength, z: 0 });
       }
     }
-  }, [gui.jumpStrength, gui.radius, pos, rapier.Ray, world]);
+  }, [gui.jumpStrength, gui.radius, rapier.Ray, world]);
 
   useEffect(() => {
     const unsubscribeJump = subscribeKeys(
@@ -129,6 +123,7 @@ function Ball() {
 
   return (
     <RigidBody
+      position={[0, gui.radius, 5]} // ⚠️ `position` props on <RigidBody> (not on <mesh>)
       ref={bodyRef}
       colliders="ball"
       restitution={gui.restitution}
@@ -136,7 +131,7 @@ function Ball() {
       linearDamping={gui.linearDamping}
       angularDamping={gui.angularDamping}
     >
-      <mesh ref={meshRef} position={[0, gui.radius, 5]} castShadow>
+      <mesh castShadow>
         <icosahedronGeometry args={[gui.radius, 1]} />
         <meshStandardMaterial color="red" flatShading />
       </mesh>

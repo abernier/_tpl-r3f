@@ -29,22 +29,24 @@ function App() {
 
             <Layout />
 
-            <RigidBody>
-              <mesh position-y={1} castShadow>
+            {/* 🧊 cube */}
+            <RigidBody position-y={1}>
+              <mesh castShadow>
                 <boxGeometry args={[2, 2, 2]} />
                 <meshStandardMaterial color="blue" />
               </mesh>
             </RigidBody>
 
+            {/* 🏀 ball */}
             <Ball />
 
             {/* Ground */}
-            <RigidBody type="fixed">
-              <mesh
-                position-y={-0.1 / 2}
-                rotation={[-Math.PI / 2, 0, 0]}
-                receiveShadow
-              >
+            <RigidBody
+              type="fixed"
+              position-y={-0.1 / 2}
+              rotation={[-Math.PI / 2, 0, 0]}
+            >
+              <mesh receiveShadow>
                 <boxGeometry args={[100, 100, 0.1]} />
                 <meshStandardMaterial color="gray" transparent opacity={0.8} />
               </mesh>

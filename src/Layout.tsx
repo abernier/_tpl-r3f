@@ -70,17 +70,6 @@ function Layout({ children, bg }: LayoutProps) {
       />
       <ambientLight intensity={0.2} />
 
-      {/* Ground */}
-      {/* <mesh
-        scale={1000}
-        rotation={[-Math.PI / 2, 0, 0]}
-        position-y="-1"
-        receiveShadow
-      >
-        <circleGeometry args={[1, 32]} />
-        <meshStandardMaterial color={gui.bg} />
-      </mesh> */}
-
       {gui.grid && <gridHelper args={[30, 30, 30]} position-y="0" />}
       {gui.axes && <axesHelper args={[5]} />}
 
