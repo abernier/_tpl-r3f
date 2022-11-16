@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "https://abernier.github.io/tpl-r3f/static/css/main.93a0497a.css",
-    "main.js": "https://abernier.github.io/tpl-r3f/static/js/main.e7a40ae2.js",
-    "index.html": "https://abernier.github.io/tpl-r3f/index.html",
-    "main.93a0497a.css.map": "https://abernier.github.io/tpl-r3f/static/css/main.93a0497a.css.map",
-    "main.e7a40ae2.js.map": "https://abernier.github.io/tpl-r3f/static/js/main.e7a40ae2.js.map"
+    "main.css": "https://abernier.github.io/_tpl-r3f/static/css/main.93a0497a.css",
+    "main.js": "https://abernier.github.io/_tpl-r3f/static/js/main.e7a40ae2.js",
+    "index.html": "https://abernier.github.io/_tpl-r3f/index.html",
+    "main.93a0497a.css.map": "https://abernier.github.io/_tpl-r3f/static/css/main.93a0497a.css.map",
+    "main.e7a40ae2.js.map": "https://abernier.github.io/_tpl-r3f/static/js/main.e7a40ae2.js.map"
   },
   "entrypoints": [
     "static/css/main.93a0497a.css",
